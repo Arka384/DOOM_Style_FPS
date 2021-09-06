@@ -1,0 +1,4 @@
+﻿  Man.cpp
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\man.cpp(8): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\man.cpp(46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  DOOM_Style_Game.vcxproj -> C:\Users\arkad\Documents\DEADSHOT FILES\C++ Programs\SFML\TESTS\DOOM_Style_Game\Debug\DOOM_Style_Game.exe
