@@ -18,6 +18,15 @@ int main()
 	sf::Time t;
 	sf::Clock clk;
 	float mx = 0, my = 0, dt = 0, fire_timer = 0, m_timer = 0, g_timer = 0;
+	bool game_over = false, start_state = true, play_state = false;
+
+	sf::Sprite start_sc, ded_sc;
+	sf::Texture start_tex, ded_tex;
+	start_tex.loadFromFile("Resources/Sprite_sheets/DOOM.png");
+	start_sc.setTexture(start_tex);
+	start_sc.setPosition(100, 100);
+	ded_tex.loadFromFile("Resources/Sprite_sheets/ded.png");
+	ded_sc.setTexture(ded_tex);
 	
 	/*
 	sf::Sprite forest;
@@ -63,66 +72,91 @@ int main()
 			case sf::Event::KeyPressed:
 				if (evnt.key.code == sf::Keyboard::Escape)
 					window.close();
+				if (evnt.key.code == sf::Keyboard::Enter) {
+					if (start_state || game_over) {
+						start_state = false;
+						game_over = false;
+						gun.reset();
+						doom_guy.reset();
+						red_guy.reset();
+						play_state = true;
+					}
+				}
+				break;
 			default:
 				break;
 			}
 		}
 		/////////////////////////
-		mx = sf::Mouse::getPosition(window).x;
-		my = sf::Mouse::getPosition(window).y;
-		check_mouse_pos(mx, my, window_dimensions, window);
-		view.setCenter(mx, my);
-		window.setView(view);
-		gun.crossair.setPosition(mx - 100, my - 300);
-		gun.update(mx, my, window_dimensions);
 
-		
-		if (m_timer >= 0.2) {	//monster
-			if ((fired && mousePressed && hit_target(gun, red_guy)) || m_dead) {
-				m_dead = red_guy.kill_animation();
-				if (!m_dead) {
-					red_guy.respawn();
-					m_dead = false;
+		if (play_state)
+		{
+			mx = sf::Mouse::getPosition(window).x;
+			my = sf::Mouse::getPosition(window).y;
+			check_mouse_pos(mx, my, window_dimensions, window);
+			view.setCenter(mx, my);
+			window.setView(view);
+			gun.crossair.setPosition(mx - 100, my - 300);
+			gun.update(mx, my, window_dimensions);
+			if (gun.health <= 0) {
+				play_state = false;
+				game_over = true;
+				ded_sc.setPosition(mx - window_dimensions.x / 2, my - window_dimensions.y / 2);
+			}
+
+			if (m_timer >= 0.2) {	//monster
+				if ((fired && mousePressed && hit_target(gun, red_guy)) || m_dead) {
+					m_dead = red_guy.kill_animation();
+					if (!m_dead) {
+						red_guy.respawn();
+						m_dead = false;
+					}
+				}
+				else
+					red_guy.walking(gun);
+				m_timer = 0;
+			}
+
+			if (g_timer >= 0.2) {	//doom guy
+				if ((fired && mousePressed && hit_target(gun, doom_guy)) || g_dead) {
+					g_dead = doom_guy.kill_animation();
+					if (!g_dead) {
+						doom_guy.respawn();
+						g_dead = false;
+					}
+				}
+				else
+					doom_guy.walking(gun);
+				g_timer = 0;
+			}
+
+			if (fired) {
+				if (fire_timer >= 0.2) {
+					gun.fire(fired);
+					fire_timer = 0;
 				}
 			}
 			else
-				red_guy.walking(gun);
-			m_timer = 0;
-		}
-
-		if (g_timer >= 0.2) {	//doom guy
-			if ((fired && mousePressed && hit_target(gun, doom_guy)) || g_dead) {
-				g_dead = doom_guy.kill_animation();
-				if (!g_dead) {
-					doom_guy.respawn();
-					g_dead = false;
-				}
-			}
-			else
-				doom_guy.walking(gun);
-			g_timer = 0;
+				gun.shotgun.setTextureRect(sf::IntRect(0, 0, 220, 145));
 		}
 		
-		
-		if (fired) {
-			if (fire_timer >= 0.2) {
-				gun.fire(fired);
-				fire_timer = 0;
-			}
-		}
-		else
-			gun.shotgun.setTextureRect(sf::IntRect(0, 0, 220, 145));
 
 		///////////////////
 		window.clear();
 		//window.draw(forest);
-		window.draw(doom_guy.man);
-		window.draw(red_guy.monster);
-		window.draw(gun.shotgun);
-		window.draw(gun.health_bar);
-		window.draw(gun.curr_health);
-		window.draw(gun.crossair);
-		window.draw(gun.bloodSplash);
+		if (start_state)
+			window.draw(start_sc);
+		if (play_state) {
+			window.draw(doom_guy.man);
+			window.draw(red_guy.monster);
+			window.draw(gun.shotgun);
+			window.draw(gun.health_bar);
+			window.draw(gun.curr_health);
+			window.draw(gun.crossair);
+			window.draw(gun.bloodSplash);
+		}
+		if (game_over)
+			window.draw(ded_sc);
 		window.display();
 	}
 }
@@ -158,3 +192,4 @@ void check_mouse_pos(float &x, float &y, sf::Vector2i window_size, sf::Window &w
 
 	sf::Mouse::setPosition(sf::Vector2i(x, y), window);
 }
+

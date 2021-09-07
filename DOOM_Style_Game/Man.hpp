@@ -16,5 +16,6 @@ public:
 	void walking(Gun &g);
 	bool kill_animation(void);
 	void respawn(void);
+	void reset(void);
 };
 

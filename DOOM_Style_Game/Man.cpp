@@ -48,3 +48,10 @@ void Man::respawn(void)
 	man.setScale(2, 2);
 	rect_x = 0;
 }
+
+void Man::reset(void)
+{
+	rect_y = rect_x = 0;
+	pos_y = 10;
+	respawn();
+}

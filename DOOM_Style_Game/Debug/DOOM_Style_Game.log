@@ -1,15 +1,49 @@
-﻿  Gun.cpp
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(41): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+﻿  main.cpp
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(94): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(95): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(167): warning C4244: 'initializing': conversion from 'const T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Monster.cpp
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\monster.cpp(8): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\monster.cpp(76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(168): warning C4244: 'initializing': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(175): warning C4244: 'initializing': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(176): warning C4244: 'initializing': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(184): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(189): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\main.cpp(193): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
   DOOM_Style_Game.vcxproj -> C:\Users\arkad\Documents\DEADSHOT FILES\C++ Programs\SFML\TESTS\DOOM_Style_Game\Debug\DOOM_Style_Game.exe

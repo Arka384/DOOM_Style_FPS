@@ -85,3 +85,10 @@ void Gun::fire(bool &fired)
 	}
 	shotgun.setTextureRect(rect);
 }
+
+void Gun::reset(void)
+{
+	rect_x = 0;
+	health = 100;
+	bloodSplash_intensity = 0;
+}

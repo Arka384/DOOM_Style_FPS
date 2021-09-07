@@ -20,5 +20,6 @@ public:
 	void Load_Resources(void);
 	void update(int, int, sf::Vector2i);
 	void fire(bool &);
+	void reset(void);
 };
 

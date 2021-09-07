@@ -76,3 +76,11 @@ void Monster::respawn(void)
 	monster.setPosition(rand() % 1366 - 400, -400);
 	monster.setScale(2, 2);
 }
+
+void Monster::reset(void)
+{
+	rect_x = rect_y = 0;
+	pos_y = 10;
+	executed = false;
+	respawn();
+}
