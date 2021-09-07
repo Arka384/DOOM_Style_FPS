@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Gun.hpp"
 #include <iostream>
 
 class Monster
@@ -13,7 +14,7 @@ public:
 	sf::Texture monster_tex;
 
 	void Load_texture(void);
-	void walking(void);
+	void walking(Gun &g);
 	bool kill_animation(void);
 	void respawn(void);
 };

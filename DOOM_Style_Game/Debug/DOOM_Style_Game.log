@@ -1,4 +1,15 @@
-﻿  Man.cpp
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\man.cpp(8): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\man.cpp(46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Gun.cpp
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(41): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\gun.cpp(42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Monster.cpp
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\monster.cpp(8): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\arkad\documents\deadshot files\c++ programs\sfml\tests\doom_style_game\doom_style_game\monster.cpp(76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   DOOM_Style_Game.vcxproj -> C:\Users\arkad\Documents\DEADSHOT FILES\C++ Programs\SFML\TESTS\DOOM_Style_Game\Debug\DOOM_Style_Game.exe

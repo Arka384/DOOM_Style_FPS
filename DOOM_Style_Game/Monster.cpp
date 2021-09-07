@@ -9,7 +9,7 @@ void Monster::Load_texture(void)
 	monster.setScale(2, 2);
 }
 
-void Monster::walking(void)
+void Monster::walking(Gun &g)
 {
 	//std::cout << monster.getPosition().y << std::endl;
 	if (monster.getPosition().y > -270) {
@@ -17,6 +17,8 @@ void Monster::walking(void)
 		if (rect_x >= 150)
 			rect_x = 0;
 		monster.setTextureRect(sf::IntRect(rect_x, 225, 50, 62));
+		g.health -= 5;
+		g.bloodSplash_intensity = 255;
 		return;
 	}
 

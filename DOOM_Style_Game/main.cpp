@@ -17,7 +17,7 @@ int main()
 	sf::View view;
 	sf::Time t;
 	sf::Clock clk;
-	float mx = 0, my = 0, dt = 0, fire_timer = 0, anim_timer = 0;
+	float mx = 0, my = 0, dt = 0, fire_timer = 0, m_timer = 0, g_timer = 0;
 	
 	/*
 	sf::Sprite forest;
@@ -29,22 +29,22 @@ int main()
 	//forest.setPosition(-650, -400);
 	*/
 
-	bool mousePressed = false, fired = false, dead = false;
+	bool mousePressed = false, fired = false, m_dead = false, g_dead = false;
 	Man doom_guy;
 	doom_guy.Load_texture();
-	//Monster red_guy;
-	//red_guy.Load_texture();
+	Monster red_guy;
+	red_guy.Load_texture();
 	Gun gun;
 	gun.Load_Resources();
 	window.setMouseCursorVisible(false);
-	//doom_guy.man.setPosition(300, 100);
 
 	while (window.isOpen())
 	{
 		t = clk.restart();
 		dt = t.asSeconds();
 		fire_timer += dt;
-		anim_timer += dt;
+		m_timer += dt;
+		g_timer += dt;
 
 		sf::Event evnt;
 		while (window.pollEvent(evnt))
@@ -74,27 +74,36 @@ int main()
 		view.setCenter(mx, my);
 		window.setView(view);
 		gun.crossair.setPosition(mx - 100, my - 300);
-		gun.setPosition(mx, my, window_dimensions);
+		gun.update(mx, my, window_dimensions);
 
 		
-		if (anim_timer >= 0.2 ) {
-			if ((fired && mousePressed && hit_target(gun, doom_guy)) || dead) {
-				//dead = red_guy.kill_animation();
-				dead = doom_guy.kill_animation();
-				if (!dead) {
-					//red_guy.respawn();
-					doom_guy.respawn();
-					dead = false;
+		if (m_timer >= 0.2) {	//monster
+			if ((fired && mousePressed && hit_target(gun, red_guy)) || m_dead) {
+				m_dead = red_guy.kill_animation();
+				if (!m_dead) {
+					red_guy.respawn();
+					m_dead = false;
 				}
 			}
-			else {
-				//red_guy.walking();
-				doom_guy.walking();
+			else
+				red_guy.walking(gun);
+			m_timer = 0;
+		}
+
+		if (g_timer >= 0.2) {	//doom guy
+			if ((fired && mousePressed && hit_target(gun, doom_guy)) || g_dead) {
+				g_dead = doom_guy.kill_animation();
+				if (!g_dead) {
+					doom_guy.respawn();
+					g_dead = false;
+				}
 			}
-			anim_timer = 0;
+			else
+				doom_guy.walking(gun);
+			g_timer = 0;
 		}
 		
-
+		
 		if (fired) {
 			if (fire_timer >= 0.2) {
 				gun.fire(fired);
@@ -108,9 +117,12 @@ int main()
 		window.clear();
 		//window.draw(forest);
 		window.draw(doom_guy.man);
-		//window.draw(red_guy.monster);
+		window.draw(red_guy.monster);
 		window.draw(gun.shotgun);
+		window.draw(gun.health_bar);
+		window.draw(gun.curr_health);
 		window.draw(gun.crossair);
+		window.draw(gun.bloodSplash);
 		window.display();
 	}
 }

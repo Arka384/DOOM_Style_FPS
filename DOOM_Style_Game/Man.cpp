@@ -9,14 +9,15 @@ void Man::Load_texture(void)
 	man.setScale(2, 2);
 }
 
-void Man::walking(void)
+void Man::walking(Gun &g)
 {
-	//std::cout << man.getPosition().y << std::endl;
 	if (man.getPosition().y > -300) {
 		rect_y += 100;
 		if (rect_y >= 600)
 			rect_y = 400;
 		man.setTextureRect(sf::IntRect(0, rect_y, 60, 100));
+		g.health -= 5;
+		g.bloodSplash_intensity = 255;
 		return;
 	}
 
