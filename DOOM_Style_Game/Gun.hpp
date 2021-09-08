@@ -1,5 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
+#include "Global.h"
 #include <SFML/Audio.hpp>
 #include <iostream>
 
@@ -13,12 +14,12 @@ public:
 	sf::Sprite shotgun, crossair, bloodSplash;
 	sf::Texture shotgun_texture, crossair_tex, bloodSplash_tex;
 	sf::IntRect rect;
-	sf::SoundBuffer shotgun_buffer;
-	sf::Sound shotgun_sound;
+	sf::SoundBuffer shotgun_buffer, theme_buffer, hurt_buf, died_buf, over_buf;
+	sf::Sound shotgun_sound, theme_sound, hurt, died, over;
 	sf::RectangleShape health_bar, curr_health;
 	
 	void Load_Resources(void);
-	void update(int, int, sf::Vector2i);
+	void update(int, int);
 	void fire(bool &);
 	void reset(void);
 };

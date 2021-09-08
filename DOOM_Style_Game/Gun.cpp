@@ -8,6 +8,7 @@ void Gun::Load_Resources(void)
 
 	shotgun.setTexture(shotgun_texture);
 	shotgun.setTextureRect(sf::IntRect(0, 0, 220, 145));
+	shotgun.setScale(2, 2);
 	crossair.setTexture(crossair_tex);
 
 	bloodSplash.setTexture(bloodSplash_tex);
@@ -16,7 +17,15 @@ void Gun::Load_Resources(void)
 
 	shotgun_buffer.loadFromFile("Resources/Sounds/Shotgun.wav");
 	shotgun_sound.setBuffer(shotgun_buffer);
-	shotgun.setScale(2, 2);
+	theme_buffer.loadFromFile("Resources/Sounds/theme_song.wav");
+	theme_sound.setBuffer(theme_buffer);
+	theme_sound.setLoop(true);
+	hurt_buf.loadFromFile("Resources/Sounds/bhit_flesh.wav");
+	hurt.setBuffer(hurt_buf);
+	died_buf.loadFromFile("Resources/Sounds/die.wav");
+	died.setBuffer(died_buf);
+	over_buf.loadFromFile("Resources/Sounds/you_died.wav");
+	over.setBuffer(over_buf);
 
 	health_bar.setSize(sf::Vector2f(200, 20));
 	health_bar.setOutlineThickness(4.f);
@@ -26,20 +35,20 @@ void Gun::Load_Resources(void)
 	curr_health.setFillColor(sf::Color::Red);
 }
 
-void Gun::update(int x, int y, sf::Vector2i size)
+void Gun::update(int x, int y)
 {
-	if (x <= size.x/2) {
+	if (x <= window_size.x/2) {
 		shotgun.setScale(2, 2);
 	}
 	else {
 		shotgun.setScale(-2, 2);
 	}
-	shotgun.setPosition(size.x / 2,
-		(y + size.y / 1.5) - shotgun.getGlobalBounds().height);
+	shotgun.setPosition(window_size.x / 2,
+		(y + window_size.y / 1.5) - shotgun.getGlobalBounds().height);
 
-	health_bar.setPosition((x - size.x / 2) + health_bar.getSize().x, (y - size.y/1.6) + health_bar.getSize().y);
+	health_bar.setPosition((x - window_size.x / 2) + health_bar.getSize().x, (y - window_size.y/1.6) + health_bar.getSize().y);
 	curr_health.setSize(sf::Vector2f(health * 2, 20));
-	curr_health.setPosition((x - size.x / 2) + health_bar.getSize().x, (y - size.y / 1.6) + health_bar.getSize().y);
+	curr_health.setPosition((x - window_size.x / 2) + health_bar.getSize().x, (y - window_size.y / 1.6) + health_bar.getSize().y);
 
 	bloodSplash.setPosition(x - bloodSplash.getGlobalBounds().width/2, y - bloodSplash.getGlobalBounds().height/2);
 	if(bloodSplash_intensity > 0)

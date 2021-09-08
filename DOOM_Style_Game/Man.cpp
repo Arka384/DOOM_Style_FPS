@@ -5,7 +5,7 @@ void Man::Load_texture(void)
 	man_texture.loadFromFile("Resources/Sprite_sheets/doom_man.png");
 	man.setTexture(man_texture);
 	man.setTextureRect(sf::IntRect(0, rect_y, 60, 100));
-	man.setPosition(rand() % 1366 - 400, -400);
+	man.setPosition(rand() % window_size.x - 300, -400);
 	man.setScale(2, 2);
 }
 
@@ -17,6 +17,8 @@ void Man::walking(Gun &g)
 			rect_y = 400;
 		man.setTextureRect(sf::IntRect(0, rect_y, 60, 100));
 		g.health -= 5;
+		if(g.hurt.getStatus() != sf::Sound::Status::Playing)
+			g.hurt.play();
 		g.bloodSplash_intensity = 255;
 		return;
 	}
@@ -44,7 +46,7 @@ bool Man::kill_animation(void)
 void Man::respawn(void)
 {
 	man.setTextureRect(sf::IntRect(0, rect_y, 60, 100));
-	man.setPosition(rand() % 1366 - 400, -400);
+	man.setPosition(rand() % window_size.x - 300, -400);
 	man.setScale(2, 2);
 	rect_x = 0;
 }

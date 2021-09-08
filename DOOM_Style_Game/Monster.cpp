@@ -5,7 +5,7 @@ void Monster::Load_texture(void)
 	monster_tex.loadFromFile("Resources/Sprite_sheets/doom_sprite_sheet.png");
 	monster.setTexture(monster_tex);
 	monster.setTextureRect(sf::IntRect(rect_x, rect_y, 42, 64));
-	monster.setPosition(rand() % 1100 + 100, -400);
+	monster.setPosition(rand() % window_size.x - 300, -400);
 	monster.setScale(2, 2);
 }
 
@@ -18,6 +18,8 @@ void Monster::walking(Gun &g)
 			rect_x = 0;
 		monster.setTextureRect(sf::IntRect(rect_x, 225, 50, 62));
 		g.health -= 5;
+		if (g.hurt.getStatus() != sf::Sound::Status::Playing)
+			g.hurt.play();
 		g.bloodSplash_intensity = 255;
 		return;
 	}
@@ -73,7 +75,7 @@ bool Monster::kill_animation(void)
 void Monster::respawn(void)
 {
 	monster.setTextureRect(sf::IntRect(rect_x, 0, 42, 62));
-	monster.setPosition(rand() % 1366 - 400, -400);
+	monster.setPosition(rand() % window_size.x - 300, -400);
 	monster.setScale(2, 2);
 }
 

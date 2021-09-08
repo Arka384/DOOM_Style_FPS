@@ -1,4 +1,5 @@
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
+#include "Global.h"
 #include <iostream>
 #include "Monster.hpp"
 #include "Man.hpp"
@@ -6,14 +7,14 @@
 
 bool hit_target(Gun g, Man m);
 bool hit_target(Gun g, Monster m);
-void check_mouse_pos(float &x, float &y, sf::Vector2i window_size, sf::Window &window);
+void check_mouse_pos(float &x, float &y, sf::Window &window);
+bool colliding(Man g, Monster m);
 
 
 int main()
 {
 	srand(time(NULL));
-	sf::Vector2i window_dimensions(1366, 786);
-	sf::RenderWindow window(sf::VideoMode(window_dimensions.x, window_dimensions.y), "Test", sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(window_size.x, window_size.y), "Test", sf::Style::Close);
 	sf::View view;
 	sf::Time t;
 	sf::Clock clk;
@@ -24,7 +25,7 @@ int main()
 	sf::Texture start_tex, ded_tex;
 	start_tex.loadFromFile("Resources/Sprite_sheets/DOOM.png");
 	start_sc.setTexture(start_tex);
-	start_sc.setPosition(100, 100);
+	start_sc.setPosition(window_size.x/2 - start_sc.getGlobalBounds().width/2, window_size.y / 2 - start_sc.getGlobalBounds().height / 2);
 	ded_tex.loadFromFile("Resources/Sprite_sheets/ded.png");
 	ded_sc.setTexture(ded_tex);
 	
@@ -80,6 +81,7 @@ int main()
 						doom_guy.reset();
 						red_guy.reset();
 						play_state = true;
+						gun.theme_sound.play();
 					}
 				}
 				break;
@@ -93,15 +95,17 @@ int main()
 		{
 			mx = sf::Mouse::getPosition(window).x;
 			my = sf::Mouse::getPosition(window).y;
-			check_mouse_pos(mx, my, window_dimensions, window);
+			check_mouse_pos(mx, my, window);
 			view.setCenter(mx, my);
 			window.setView(view);
 			gun.crossair.setPosition(mx - 100, my - 300);
-			gun.update(mx, my, window_dimensions);
+			gun.update(mx, my);
 			if (gun.health <= 0) {
+				gun.theme_sound.stop();
+				gun.died.play();
 				play_state = false;
+				ded_sc.setPosition(mx - window_size.x / 2, my - window_size.y / 2);
 				game_over = true;
-				ded_sc.setPosition(mx - window_dimensions.x / 2, my - window_dimensions.y / 2);
 			}
 
 			if (m_timer >= 0.2) {	//monster
@@ -109,6 +113,8 @@ int main()
 					m_dead = red_guy.kill_animation();
 					if (!m_dead) {
 						red_guy.respawn();
+						if (colliding(doom_guy, red_guy))
+							red_guy.respawn();
 						m_dead = false;
 					}
 				}
@@ -178,7 +184,7 @@ bool hit_target(Gun g, Monster m)
 		&& y > m.monster.getPosition().y && y < m.monster.getPosition().y + m.monster.getGlobalBounds().height;
 }
 
-void check_mouse_pos(float &x, float &y, sf::Vector2i window_size, sf::Window &window)
+void check_mouse_pos(float &x, float &y, sf::Window &window)
 {
 	if (x >= window_size.x)
 		x = window_size.x;
@@ -191,5 +197,14 @@ void check_mouse_pos(float &x, float &y, sf::Vector2i window_size, sf::Window &w
 		y = 20;
 
 	sf::Mouse::setPosition(sf::Vector2i(x, y), window);
+}
+
+bool colliding(Man g, Monster m)
+{
+	if (m.monster.getPosition().x > g.man.getPosition().x && m.monster.getPosition().x + m.monster.getGlobalBounds().width
+		< g.man.getPosition().x + g.man.getGlobalBounds().width)
+		return true;
+
+	return false;
 }
 

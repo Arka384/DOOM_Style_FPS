@@ -135,6 +135,7 @@
     <ClCompile Include="Monster.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Global.h" />
     <ClInclude Include="Gun.hpp" />
     <ClInclude Include="Man.hpp" />
     <ClInclude Include="Monster.hpp" />
