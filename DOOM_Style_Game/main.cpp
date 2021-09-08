@@ -1,6 +1,5 @@
 //#include <SFML/Graphics.hpp>
 #include "Global.h"
-#include <iostream>
 #include "Monster.hpp"
 #include "Man.hpp"
 #include "Gun.hpp"
@@ -9,7 +8,7 @@ bool hit_target(Gun g, Man m);
 bool hit_target(Gun g, Monster m);
 void check_mouse_pos(float &x, float &y, sf::Window &window);
 bool colliding(Man g, Monster m);
-
+void get_resolution(sf::Window &window);
 
 int main()
 {
@@ -27,18 +26,8 @@ int main()
 	start_sc.setTexture(start_tex);
 	start_sc.setPosition(window_size.x/2 - start_sc.getGlobalBounds().width/2, window_size.y / 2 - start_sc.getGlobalBounds().height / 2);
 	ded_tex.loadFromFile("Resources/Sprite_sheets/ded.png");
-	ded_sc.setTexture(ded_tex);
+	ded_sc.setTexture(ded_tex);	
 	
-	/*
-	sf::Sprite forest;
-	sf::Texture forest_tex;
-	forest_tex.loadFromFile("Resources/Sprite_sheets/dark_alley.jpg");
-	forest.setTexture(forest_tex);
-	forest.setScale(1.5, 1.5);
-	forest.setPosition(-250, -100);
-	//forest.setPosition(-650, -400);
-	*/
-
 	bool mousePressed = false, fired = false, m_dead = false, g_dead = false;
 	Man doom_guy;
 	doom_guy.Load_texture();
@@ -149,7 +138,6 @@ int main()
 
 		///////////////////
 		window.clear();
-		//window.draw(forest);
 		if (start_state)
 			window.draw(start_sc);
 		if (play_state) {
@@ -206,5 +194,11 @@ bool colliding(Man g, Monster m)
 		return true;
 
 	return false;
+}
+
+void get_resolution(sf::Window &window)
+{
+	
+	
 }
 

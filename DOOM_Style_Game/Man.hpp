@@ -2,7 +2,6 @@
 //#include <SFML/Graphics.hpp>
 #include "Global.h"
 #include "Gun.hpp"
-#include <iostream>
 
 class Man
 {

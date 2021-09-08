@@ -2,7 +2,6 @@
 //#include <SFML/Graphics.hpp>
 #include "Global.h"
 #include <SFML/Audio.hpp>
-#include <iostream>
 
 class Gun
 {
